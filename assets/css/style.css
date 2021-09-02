@@ -4,6 +4,13 @@ body{
     background-color: #202124;
 }
 
+.centered{
+    position:relative;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%)
+}
+
 #main-div {
     display: flex;
     flex-direction: row;
@@ -42,6 +49,7 @@ body{
     flex-direction: column;
     justify-content: space-between;
     padding: 1rem;
+
 }
 
 #chat-header {
@@ -74,6 +82,7 @@ body{
     min-height: 57vh;
     overflow-y: scroll;
     margin-bottom: 1rem;
+    word-wrap: break-word;
 }
 
 #form {
@@ -102,14 +111,23 @@ button {
     cursor: pointer;
 }
 
+.user-video {
+    cursor: pointer;
+}
+
 video {
     width: 250px;
     height: 150px;
     object-fit: cover;
     border-radius: .5rem;
     margin: .5rem;
+    cursor: pointer;
 }
 
+.user-video:hover {
+    opacity: .6;
+    transition: opacity .5s ease-in-out;
+}
 #controls-tab {
     background-color: #202124;
     width: 100%;

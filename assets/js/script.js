@@ -2,7 +2,7 @@ const socket = io();
 const videoGrid = document.getElementById('video-grid'); //div where our video will be loaded
 
 var myPeer = new Peer();
-
+let count = 0;
 let myVideoStream; //the video stram is stored in this variable
 const myVideo = document.createElement('video'); //div which contains the video
 let currentPeer = null;
@@ -92,10 +92,13 @@ function addVideoStream(video, stream, userName) {
     });
     let outerDiv = document.createElement('div');
     outerDiv.classList.add('user-video');
+    outerDiv.setAttribute('id', 'video-' + count);
+    count++;
     outerDiv.appendChild(video);
     let nameDiv = document.createElement('div');
+    let pinDiv = document.createElement('div');
     nameDiv.classList.add('user-name');
-    nameDiv.innerHTML = userName + `&nbsp;&nbsp;<i class="fas fa-microphone"></i>`;
+    nameDiv.innerHTML = userName;
     outerDiv.appendChild(nameDiv);
     videoGrid.appendChild(outerDiv); //appending to 'video-grid' div
 }
@@ -149,6 +152,14 @@ function setUnmuteAudio() {
 document.getElementById('video-off').addEventListener('click', turnUserVideoOnOff);
 document.getElementById('mute').addEventListener('click', muteUnmuteUser);
 
+function urlify(text) {
+    var urlRegex = /(https?:\/\/[^\s]+)/g;
+    return text.replace(urlRegex, function(url) {
+      return '<a href="' + url + '">' + url + '</a>';
+    })
+  }
+  
+
 $('form').submit(function (e) {
     e.preventDefault();
     let inputMsg = $('input').val();
@@ -158,6 +169,7 @@ $('form').submit(function (e) {
 })
 
 socket.on('recieve-message', (inputMsg, userName) => {
+    inputMsg = urlify(inputMsg);
     $('#messages').append(`<li><b style="font-size:.9rem">${userName}</b>&nbsp;${formatAMPM(new Date)}<br/><br/>${inputMsg}</li>`);
     console.log('From server :: ', inputMsg);
 })
@@ -188,7 +200,6 @@ function startScreenShare() {
             sender.replaceTrack(videoTrack)
             screenSharing = true
         }
-        console.log(screenStream)
     })
 }
 
@@ -208,3 +219,43 @@ function stopScreenSharing() {
 }
 
 document.getElementById('screen-share-btn').addEventListener('click', startScreenShare);
+
+var isExpanded = false;
+document.addEventListener('click', function(e) {
+    let clickedElem = e.target;
+    let clickedElemId = e.target.id;
+    if(isExpanded == false) {
+        console.log(clickedElem);
+        if(clickedElem.classList.contains('user-video')) {
+            let ele = document.getElementById(clickedElemId);
+            //ele.style.height = "80vh";
+           // ele.style.width = "70vw";
+            ele.firstChild.style.height = "80vh";
+            ele.firstChild.style.width = "70vw";
+            isExpanded = true;
+            let arr = document.getElementsByClassName('user-video');
+            for(let i=0;i<arr.length;i++) {
+                let elem = arr[i];
+                if(elem.id != clickedElemId) {
+                    elem.style.display = "none";
+                }
+            }
+        }
+       
+    }else {
+        if(clickedElem.classList.contains('user-video')) {
+            let ele = document.getElementById(clickedElemId);
+            //ele.style.height = "150px";
+            //ele.style.width = "250px";
+            ele.firstChild.style.height = "150px";
+            ele.firstChild.style.width = "250px";
+            document.getElementById('video-grid').style.display = "flex";
+            isExpanded = false;
+            let arr = document.getElementsByClassName('user-video');
+            for(let i=0;i<arr.length;i++) {
+               arr[i].style.display = "flex";
+            }
+        }
+    }
+    
+})
