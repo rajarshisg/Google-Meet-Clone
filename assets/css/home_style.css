@@ -1,0 +1,61 @@
+#header img{
+    width: 200px;
+}
+
+#root-div{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+#left-div {
+    width: 50vw;
+}
+
+#large-message {
+    margin-top: 25vh;
+    font-size: 2.5rem;
+    font-family: sans-serif;
+    margin-left: 2rem;
+}
+
+#small-message {
+    margin-top: 1rem;
+    font-size: 1.2rem;
+    font-family: sans-serif;
+    margin-left: 2rem;
+    color: gray;
+}
+
+#start-meeting a {
+    text-decoration: none;
+    color: white;
+}
+
+#start-meeting {
+    width: 150px;
+    height: 2.1rem;
+    padding-top: 1rem;
+    border-radius: .2rem;
+    color: white;
+    background-color: #096ae7;
+    margin-top: 3rem;
+    margin-left: 2rem;
+    font-family: sans-serif;
+    cursor: pointer;
+}
+
+#start-meeting:hover {
+    background-color: #1b66ca;
+    transition: background-color .5s ease-in-out;
+}
+
+#right-div {
+    width: 40vw;
+}
+
+#right-div img {
+    width: 40vw;
+    margin-top: 20vh;
+    margin-left: -5rem;
+}
