@@ -5,7 +5,7 @@ GMeet is a video calling platform similar to Google Meet made using NodeJS.
 
 ## Visit the official website!
 
-Visit the website from this link : [https://google-meeting.herokuapp.com/)
+Visit the website from this link : [https://google-meeting.herokuapp.com/]
 
 
 ## Features
