@@ -27,6 +27,12 @@
                     <a href="/room">&emsp;<i class="fas fa-plus"></i>&nbsp;
                     New Meeting</a>
                 </div>
+
+                <div id="enter-meeting-link">
+                    <i class="fas fa-keyboard"></i>
+                    <input type="text" name="link" placeholder="Enter meeting link" id="meeting-link-text-box">
+                </div>
+                <div id="join-button">Join</div>
             </div>
         </div>
 
@@ -37,3 +43,11 @@
     </div>
 </body>
 </html>
+
+<script>
+    document.getElementById('join-button').addEventListener('click', function() {
+        let input = document.getElementById('meeting-link-text-box').value;
+        window.location.assign(input);
+        document.getElementById('meeting-link-text-box').value = "";
+    });
+</script>
